@@ -6,10 +6,13 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Deposit from './Deposit';
+import Send from './Send';
 
 const Home = () => {
-    const [email, setEmail]=useState([])
-    const [user, loading, error] = useAuthState(auth);
+  const [email, setEmail]=useState([])
+  const [hide, setHide]=useState(false)
+  const [user, loading, error] = useAuthState(auth);
     const navigate=useNavigate()
     const fetchEmail = async () => {
         try {
@@ -29,10 +32,26 @@ const Home = () => {
         fetchEmail();
       }, [user, loading]);
 
+      const handleDeposit = () => {
+        if (hide) {
+          setHide("");
+        } else {
+          setHide(<Deposit />);
+        }
+      };
+
+      const handleSend = () => {
+        if (hide) {
+          setHide("");
+        } else {
+          setHide(<Send />);
+        }
+      };
+
   return (
-    <div className='h-full'>
+    <div className='relative h-full'>
         <NavBar/>
-        <div className='h-96'>
+        <div className='home'>
             <div className=' flex justify-center items-center flex-col mr-8'>
                 <h1 className='text-red-900'>{email}</h1>
                 <div className='flex items-center mt-8  mb-5'>
@@ -43,12 +62,19 @@ const Home = () => {
             </div>
 
 
-            <div className='flex justify-center items-center  mt-16'>
+            <div className='flex justify-center items-center  mt-6'>
            <div>
-                <button className='btn text-white text-3xl p-3 rounded mr-4'>Deposit</button>
+                <button className='btn text-white text-3xl p-3 rounded mr-4' onClick={handleDeposit}>Deposit</button>
+                <div >
+                {true ? [hide] : null}
+                </div>
+
            </div>
             <div>
-                <button className=' btn text-white text-3xl p-3 rounded ml-12'>Send Money</button>
+                <button className=' btn text-white text-3xl p-3 rounded ml-12' onClick={handleSend}>Send Money</button>
+                <div >
+                {true ? [hide] : null}
+                </div>
             </div>
         </div>
 
