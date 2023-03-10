@@ -64,14 +64,14 @@ const Home = () => {
 
             <div className='flex justify-center items-center  mt-6'>
            <div>
-                <button className='btn text-white text-3xl p-3 rounded mr-4' onClick={handleDeposit}>Deposit</button>
+                <button className='btn text-white lg:text-3xl p-3 rounded lg:mr-4' onClick={handleDeposit}>Deposit</button>
                 <div >
                 {true ? [hide] : null}
                 </div>
 
            </div>
             <div>
-                <button className=' btn text-white text-3xl p-3 rounded ml-12' onClick={handleSend}>Send Money</button>
+                <button className=' btn text-white lg:text-3xl p-3 rounded lg:ml-12' onClick={handleSend}>Send Money</button>
                 <div >
                 {true ? [hide] : null}
                 </div>
